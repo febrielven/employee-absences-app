@@ -1,10 +1,10 @@
-import React, {ReactNode} from 'react';
-import {ActivityIndicator, View, ViewStyle} from 'react-native';
-import {createStyles, withStyles, WithStyles} from '@material-ui/core';
-import MaterialButton, {ButtonProps} from '@material-ui/core/Button';
-import classNames from 'classnames';
+import React from 'react';
+import {View, ViewStyle} from 'react-native';
 
-import {BUTTON} from '../constants/colors';
+import MaterialButton, {ButtonProps} from '@material-ui/core/Button';
+
+
+// import {BUTTON} from '../constants/colors';
 
 type ButtonType = 'default' | 'primary' | 'secondary';
 
@@ -14,8 +14,8 @@ type Props =
     buttonType?: ButtonType;
     isLoading?: boolean;
     disabled?: boolean;
-    children?: ReactNode;
     containerStyle?: ViewStyle;
+    text:string;
   };
 
 function Button(props: Props) {
@@ -27,6 +27,7 @@ function Button(props: Props) {
     onPress,
     buttonType = 'default' as ButtonType,
     containerStyle,
+    text,
     ...otherProps
   } = props;
 
@@ -40,11 +41,7 @@ function Button(props: Props) {
         disableRipple={isLoading}
         {...otherProps}
       >
-        {isLoading ? (
-          <ActivityIndicator size={24} color={BUTTON[buttonType].loading} />
-        ) : (
-          children
-        )}
+          {text}
       </MaterialButton>
     </View>
   );
