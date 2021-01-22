@@ -19,13 +19,13 @@ function Absences() {
     <>
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
-        {/* <Button
+        <Button
           onPress={handleSubmit((_data) => {
           })}
           containerStyle={styles.nextButton}
         >
           Login
-        </Button> */}
+        </Button>
       </View>
     </>
   );
