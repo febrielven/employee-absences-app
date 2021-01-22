@@ -1,15 +1,18 @@
 import React, {forwardRef, ReactNode, Ref} from 'react';
-import TextField, {TextFieldProps} from '@material-ui/core/TextField';
+import {StyleProp, TextStyle} from 'react-native';
+import {TextInput as TextField} from 'react-native-paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import {TEXT_INPUT} from '../constants/colors';
 
-export type TextInputCoreUIProps = TextFieldProps & {
+export type TextInputCoreUIProps = {
   onChangeText?: (input: string) => void;
   label?: string;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
   readOnly?: boolean;
+  disabled?: boolean;
+  style:StyleProp<TextStyle>
 };
 
 function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
@@ -24,10 +27,10 @@ function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
     ...otherProps
   } = props;
 
-  let combinedStyle = {
-    ...(disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}),
-    ...style,
-  };
+  // let combinedStyle = {
+  //   ...(disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}),
+  //   ...style,
+  // };
 
   return (
     <TextField
@@ -41,16 +44,16 @@ function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
             }
           : undefined
       }
-      style={combinedStyle}
+      style={style}
       disabled={disabled || readOnly}
-      InputProps={{
-        startAdornment: leftElement ? (
-          <InputAdornment position="start">{leftElement}</InputAdornment>
-        ) : undefined,
-        endAdornment: rightElement ? (
-          <InputAdornment position="end">{rightElement}</InputAdornment>
-        ) : undefined,
-      }}
+      // InputProps={{
+      //   startAdornment: leftElement ? (
+      //     <InputAdornment position="start">{leftElement}</InputAdornment>
+      //   ) : undefined,
+      //   endAdornment: rightElement ? (
+      //     <InputAdornment position="end">{rightElement}</InputAdornment>
+      //   ) : undefined,
+      // }}
       {...otherProps}
     />
   );

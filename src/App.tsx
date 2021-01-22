@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {Button} from './generals/core-ui'
+import {Absences} from './scenes/absences';
 import {Header, Footer} from './generals/components';
 
 export default function App() {
@@ -9,7 +9,7 @@ export default function App() {
       <Header />
       <View style={styles.container}>
         <View style={styles.mobileView}>
-            <Button>Button</Button>
+          <Absences />
         </View>
       </View>
       <Footer />
@@ -22,6 +22,7 @@ const styles = StyleSheet.create({
     height: '100%',
     display: 'flex',
     flex:1,
+   
   },
   mobileView: {
     flex: 1,

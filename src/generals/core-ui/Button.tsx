@@ -1,81 +1,128 @@
 import React, {ReactNode} from 'react';
-import {ActivityIndicator, View, ViewStyle, Text} from 'react-native';
-import {createStyles, withStyles, WithStyles} from '@material-ui/core';
-import MaterialButton, {ButtonProps} from '@material-ui/core/Button';
-import classNames from 'classnames';
+import {
+  ActivityIndicator,
+  View,
+  ViewStyle,
+  TouchableOpacity,
+  StyleSheet,
+} from 'react-native';
+import Text from './Text';
 
 import {BUTTON} from '../constants/colors';
 
 type ButtonType = 'default' | 'primary' | 'secondary';
 
-type Props = WithStyles<typeof styles> &
-  ButtonProps & {
-    onPress?:() => void;
-    buttonType?: ButtonType;
-    isLoading?: boolean;
-    disabled?: boolean;
-    children?: ReactNode;
-    containerStyle?: ViewStyle;
-  };
+type Props = {
+  onPress?: () => void;
+  buttonType?: ButtonType;
+  isLoading?: boolean;
+  disabled?: boolean;
+  children?: ReactNode;
+  containerStyle?: ViewStyle;
+};
 
 function Button(props: Props) {
   let {
     children,
-    classes,
     isLoading = false,
     disabled = false,
     onPress,
     buttonType = 'default' as ButtonType,
     containerStyle,
-    ...otherProps
   } = props;
 
-  let buttonStyle = disabled
-    ? classes.coreStyle
-    : classNames(classes.coreStyle, classes[buttonType]);
+  let buttonStyle = styles.default;
+  if (buttonType === 'primary') {
+    buttonStyle = styles.primary;
+  } else if (buttonType === 'secondary') {
+    buttonStyle = styles.secondary;
+  }
 
   return (
     <View style={containerStyle}>
-      <MaterialButton
-        variant="contained"
-        onClick={onPress}
+      <TouchableOpacity
+        style={StyleSheet.flatten([
+          styles.boxButton,
+          disabled ? styles.disabled : buttonStyle,
+        ])}
         disabled={disabled}
-        className={buttonStyle}
-        disableRipple={isLoading}
-      ><Text>{children}</Text>
-      </MaterialButton>
+        onPress={onPress}
+      >
+        <Text
+          typeColor={
+            buttonType === 'primary' || disabled ? 'default' : 'secondary'
+          }
+          style={styles.coreStyle}
+        >
+          {children}
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 }
 
-const styles = createStyles({
+export default Button;
+
+const styles = StyleSheet.create({
   coreStyle: {
     fontWeight: 'bold',
+  },
+  boxButton: {
+    margin: 5,
+    padding: 10,
+    borderRadius: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
   },
   default: {
     borderColor: BUTTON.default.border,
     backgroundColor: BUTTON.default.background,
     color: BUTTON.default.text,
-    border: '1px solid',
-    '&:hover': {
-      backgroundColor: BUTTON.default.hover,
-    },
   },
   primary: {
     borderColor: BUTTON.primary.border,
     backgroundColor: BUTTON.primary.background,
-    border: '1px solid',
-    '&:hover': {
-      backgroundColor: BUTTON.primary.hover,
-    },
+    color: BUTTON.primary.text,
   },
   secondary: {
+    borderColor: BUTTON.secondary.border,
     backgroundColor: BUTTON.secondary.background,
     color: BUTTON.secondary.text,
-    '&:hover': {
-      backgroundColor: BUTTON.secondary.hover,
-    },
+  },
+  disabled: {
+    borderColor: BUTTON.disabled.border,
+    backgroundColor: BUTTON.disabled.background,
+    color: BUTTON.disabled.text,
   },
 });
 
-export default withStyles(styles)(Button);
+// const styles = createStyles({
+//   coreStyle: {
+//     fontWeight: 'bold',
+//   },
+//   default: {
+//     borderColor: BUTTON.default.border,
+//     backgroundColor: BUTTON.default.background,
+//     color: BUTTON.default.text,
+//     border: '1px solid',
+//     '&:hover': {
+//       backgroundColor: BUTTON.default.hover,
+//     },
+//   },
+//   primary: {
+//     borderColor: BUTTON.primary.border,
+//     backgroundColor: BUTTON.primary.background,
+//     border: '1px solid',
+//     '&:hover': {
+//       backgroundColor: BUTTON.primary.hover,
+//     },
+//   },
+//   secondary: {
+//     backgroundColor: BUTTON.secondary.background,
+//     color: BUTTON.secondary.text,
+//     '&:hover': {
+//       backgroundColor: BUTTON.secondary.hover,
+//     },
+//   },
+// });

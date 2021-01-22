@@ -11,6 +11,8 @@ const SOFT_YELLOW = '#F79931';
 /**
  * Opacity main colors in solid hex values
  */
+const BLACK50 = 'rgba(0, 0, 0, 0.5)';
+const BLUE50 = 'rgba(5, 85, 159, 0.5)';
 const SOFT_BLUE08 = 'rgba(221, 226, 255, 0.08)';
 const SOFT_BLUE10 = 'rgba(242, 246, 250, 0.1)';
 const GRAY30 = '#CDCFD0';
@@ -45,7 +47,7 @@ export const BUTTON = {
     text: GRAY30,
     hover: GRAY90,
     loading: BLACK,
-    border: GRAY30,
+    border: GRAY90,
   },
   secondary: {
     background: SOFT_YELLOW,
@@ -54,6 +56,12 @@ export const BUTTON = {
     loading: WHITE,
     border: SOFT_YELLOW,
   },
+  disabled: {
+    background: SOFT_BLUE08,
+    text: SOFT_GRAY,
+    loading: WHITE,
+    border: SOFT_GRAY,
+  }
 };
 
 export const ICON = {
