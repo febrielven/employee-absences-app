@@ -19,13 +19,13 @@ function Absences() {
     <>
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
-        <Button
+        {/* <Button
           onPress={handleSubmit((_data) => {
           })}
           containerStyle={styles.nextButton}
         >
           Login
-        </Button>
+        </Button> */}
       </View>
     </>
   );
@@ -40,12 +40,12 @@ type AuthProps = {
 function Auth({control, errors}: AuthProps) {
   return (
     <View>
-       <Text size="xlarge" bold style={styles.category}>
+       {/* <Text size="xlarge" bold style={styles.category}>
         Login Karyawan WFH
       </Text>
       <Text size="large" bold style={styles.categoryDescription}>
         Masukan data akun Anda untuk proses absensi
-      </Text>
+      </Text> */}
       {/* <ControlledTextInput
         control={control}
         rules={{
