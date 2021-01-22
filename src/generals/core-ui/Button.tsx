@@ -36,13 +36,7 @@ function Button(props: Props) {
     <View style={containerStyle}>
       <MaterialButton
         variant="contained"
-        onClick={onPress}
-        disabled={disabled}
-        disableRipple={isLoading}
-        {...otherProps}
-      >
-          {text}
-      </MaterialButton>
+      >{text}</MaterialButton>
     </View>
   );
 }
