@@ -18,9 +18,7 @@ function Absences() {
   return (
     <>
       <View style={styles.container}>
-        <Auth control={control} errors={errors} />
-        <Button />
-         
+        <Auth control={control} errors={errors} />  
       </View>
     </>
   );
