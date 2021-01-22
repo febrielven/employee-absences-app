@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
-import {Absences} from './scenes/absences';
 import {Header, Footer} from './generals/components';
 
 export default function App() {
@@ -9,7 +8,6 @@ export default function App() {
       <Header />
       <View style={styles.container}>
         <View style={styles.mobileView}>
-          <Absences />
         </View>
       </View>
       <Footer />
