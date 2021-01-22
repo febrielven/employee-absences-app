@@ -20,9 +20,6 @@ function Absences() {
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
         <Button
-          onPress={handleSubmit(() => {
-              console.log('test');
-          })}
           containerStyle={styles.nextButton}
         >
           Login
