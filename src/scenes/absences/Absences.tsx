@@ -46,7 +46,7 @@ function Auth({control, errors}: AuthProps) {
       <Text size="large" bold style={styles.categoryDescription}>
         Masukan data akun Anda untuk proses absensi
       </Text>
-      <ControlledTextInput
+      {/* <ControlledTextInput
         control={control}
         rules={{
           required: 'NIK wajib diisi',
@@ -81,7 +81,7 @@ function Auth({control, errors}: AuthProps) {
         name='password'
         label='Password*'
         style={styles.input}
-      />
+      /> */}
       
     </View>
   );
