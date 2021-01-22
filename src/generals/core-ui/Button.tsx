@@ -1,4 +1,4 @@
-import React, {ReactNode} from 'react';
+import React from 'react';
 import {ActivityIndicator, View, ViewStyle} from 'react-native';
 // import {createStyles, withStyles, WithStyles} from '@material-ui/core';
 import MaterialButton, {ButtonProps} from '@material-ui/core/Button';
@@ -13,13 +13,11 @@ type Props ={
     buttonType?: ButtonType;
     isLoading?: boolean;
     disabled?: boolean;
-    children?: ReactNode;
     containerStyle?: ViewStyle;
   };
 
 function Button(props: Props) {
   let {
-    children,
     isLoading,
     disabled,
     onPress,
@@ -39,7 +37,7 @@ function Button(props: Props) {
         disableRipple={isLoading}
         {...otherProps}
       >
-        {children}
+        Login
       </MaterialButton>
     </View>
   );
