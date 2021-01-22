@@ -5,11 +5,19 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "format": "prettier --write \"src/**/*.{ts,tsx}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx}\"",
+    "lint": "eslint --max-warnings 0 \"src/**/*.{ts,tsx}\"",
+    "typecheck": "tsc --noEmit -p ."
   },
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "eslint": "^7.18.0",
+    "eslint-config-kodefox": "^1.1.0",
     "expo": "~40.0.0",
     "expo-status-bar": "~1.0.3",
+    "metro-config": "^0.64.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
@@ -20,7 +28,18 @@
     "@types/react": "~16.9.35",
     "@types/react-dom": "~16.9.8",
     "@types/react-native": "~0.63.2",
+    "prettier": "2.2.1",
+    "react-native-svg-transformer": "^0.14.3",
     "typescript": "~4.0.0"
+  },
+  "eslintConfig": {
+    "extends": "kodefox/react-native"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "arrowParens": "always"
   },
   "private": true
 }
