@@ -58,7 +58,7 @@ function Auth({control, errors}: AuthProps) {
         name='nik'
         label='NIK (Nomor Induk Karyawan)*'
         style={styles.input}
-      />
+      /> */}
 
       <ControlledTextInput
         control={control}
@@ -74,7 +74,7 @@ function Auth({control, errors}: AuthProps) {
         name='password'
         label='Password*'
         style={styles.input}
-      /> */}
+      />
       
     </View>
   );
