@@ -1,42 +1,35 @@
 import React from 'react';
-import {View, ViewStyle} from 'react-native';
+import {View} from 'react-native';
 
-import MaterialButton, {ButtonProps} from '@material-ui/core/Button';
+import MaterialButton from '@material-ui/core/Button';
 
 
-// import {BUTTON} from '../constants/colors';
+// type Props =
+//   ButtonProps & {
+//     onPress?: () => void;
+//     // buttonType?: ButtonType;
+//     isLoading?: boolean;
+//     disabled?: boolean;
+//     containerStyle?: ViewStyle;
+//     text?:string;
+//   };
 
-type ButtonType = 'default' | 'primary' | 'secondary';
-
-type Props =
-  ButtonProps & {
-    onPress?: () => void;
-    buttonType?: ButtonType;
-    isLoading?: boolean;
-    disabled?: boolean;
-    containerStyle?: ViewStyle;
-    text:string;
-  };
-
-function Button(props: Props) {
-  let {
-    children,
-    classes,
-    isLoading,
-    disabled,
-    onPress,
-    buttonType = 'default' as ButtonType,
-    containerStyle,
-    text,
-    ...otherProps
-  } = props;
+function Button() {
+//   let {
+//     children,
+//     classes,
+//     isLoading,
+//     disabled,
+//     onPress,
+//     buttonType = 'default' as ButtonType,
+//     containerStyle,
+//     ...otherProps
+//   } = props;
 
 
   return (
-    <View style={containerStyle}>
-      <MaterialButton
-        variant="contained"
-      >{text}</MaterialButton>
+    <View>
+      <MaterialButton variant="contained">Test</MaterialButton>
     </View>
   );
 }

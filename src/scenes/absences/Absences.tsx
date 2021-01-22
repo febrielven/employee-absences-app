@@ -19,7 +19,7 @@ function Absences() {
     <>
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
-        <Button text="Login">Login</Button>
+        <Button>Login</Button>
       </View>
     </>
   );
