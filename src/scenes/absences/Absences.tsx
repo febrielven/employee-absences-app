@@ -62,8 +62,8 @@ function Auth({control, errors}: AuthProps) {
         }}
         error={!!errors.nik}
         helperText={errors.nik?.message}
-        name="nik"
-        label="NIK (Nomor Induk Karyawan)*"
+        name='nik'
+        label='NIK (Nomor Induk Karyawan)*'
         style={styles.input}
       />
 
@@ -78,8 +78,8 @@ function Auth({control, errors}: AuthProps) {
         }}
         error={!!errors.password}
         helperText={errors.password?.message}
-        name="password"
-        label="Password*"
+        name='password'
+        label='Password*'
         style={styles.input}
       />
       
