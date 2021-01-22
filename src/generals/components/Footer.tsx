@@ -8,9 +8,9 @@ import {FOOTER} from '../constants/colors';
 export default function Footer() {
   return (
     <View style={styles.container}>
-      <Text size="small" typeColor="secondary">
+      {/* <Text size="small" typeColor="secondary">
         Copyright &#9400;{new Date().getFullYear()} Absensi Karyawan WFH
-      </Text>
+      </Text> */}
     </View>
   );
 }

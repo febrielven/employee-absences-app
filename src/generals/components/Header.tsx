@@ -9,9 +9,9 @@ export default function Header() {
   return (
     <View style={styles.container}>
       <View>
-        <Text size="xlarge" typeColor="secondary" style={styles.text}>
+        {/* <Text size="xlarge" typeColor="secondary" style={styles.text}>
             Absensi APP
-        </Text>
+        </Text> */}
       </View>
     </View>
   );
