@@ -55,11 +55,11 @@ function Auth({control, errors}: AuthProps) {
             message: 'NIK yang diinput tidak valid',
           },
         }}
-        transformOutput={(event) => {
-          let output = event.target.value;
-          let filteredOutput = output.replace(/[^0-9]/g, '');
-          return filteredOutput.slice(0, 8);
-        }}
+        // transformOutput={(event) => {
+        //   let output = event.target.value;
+        //   let filteredOutput = output.replace(/[^0-9]/g, '');
+        //   return filteredOutput.slice(0, 8);
+        // }}
         error={!!errors.nik}
         helperText={errors.nik?.message}
         name='nik'
