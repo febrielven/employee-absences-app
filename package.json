@@ -13,6 +13,8 @@
   },
   "dependencies": {
     "@material-ui/core": "^4.11.2",
+    "@types/classnames": "^2.2.11",
+    "classnames": "^2.2.6",
     "eslint": "^7.18.0",
     "eslint-config-kodefox": "^1.1.0",
     "expo": "~40.0.0",
@@ -20,6 +22,7 @@
     "metro-config": "^0.64.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "react-hook-form": "^6.14.2",
     "react-native": "https://github.com/expo/react-native/archive/sdk-40.0.1.tar.gz",
     "react-native-web": "~0.13.12"
   },

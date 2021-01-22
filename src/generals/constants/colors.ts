@@ -62,3 +62,12 @@ export const ICON = {
   secondary: WHITE,
   disabled: GRAY90,
 };
+
+export const HEADER = {
+  background: PRIMARY,
+  shadow: GRAY30,
+};
+
+export const FOOTER = {
+  background: PRIMARY,
+};

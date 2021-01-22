@@ -1,61 +1,59 @@
-import React, {ReactNode} from 'react';
-import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import React, {forwardRef, ReactNode, Ref} from 'react';
 import TextField, {TextFieldProps} from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import {TEXT_INPUT} from '../constants/colors';
 
-type Props = TextFieldProps & {
+export type TextInputCoreUIProps = TextFieldProps & {
   onChangeText?: (input: string) => void;
   label?: string;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
   readOnly?: boolean;
-  containerStyle?: StyleProp<ViewStyle>;
 };
 
-function TextInput(props: Props) {
+function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
   let {
     label,
-    placeholder,
     onChangeText,
     leftElement,
     rightElement,
     readOnly,
     disabled,
-    containerStyle,
+    style,
     ...otherProps
   } = props;
 
+  let combinedStyle = {
+    ...(disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}),
+    ...style,
+  };
+
   return (
-    <View style={[styles.container, containerStyle]}>
-      <TextField
-        label={label}
-        placeholder={placeholder}
-        variant="outlined"
-        onChange={(event) => {
-          onChangeText && onChangeText(event.target.value);
-        }}
-        style={disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}}
-        disabled={disabled || readOnly}
-        InputProps={{
-          startAdornment: leftElement ? (
-            <InputAdornment position="start">{leftElement}</InputAdornment>
-          ) : undefined,
-          endAdornment: rightElement ? (
-            <InputAdornment position="end">{rightElement}</InputAdornment>
-          ) : undefined,
-        }}
-        {...otherProps}
-      />
-    </View>
+    <TextField
+      label={label}
+      ref={ref}
+      variant="outlined"
+      onChange={
+        onChangeText
+          ? (event) => {
+              onChangeText && onChangeText(event.target.value);
+            }
+          : undefined
+      }
+      style={combinedStyle}
+      disabled={disabled || readOnly}
+      InputProps={{
+        startAdornment: leftElement ? (
+          <InputAdornment position="start">{leftElement}</InputAdornment>
+        ) : undefined,
+        endAdornment: rightElement ? (
+          <InputAdornment position="end">{rightElement}</InputAdornment>
+        ) : undefined,
+      }}
+      {...otherProps}
+    />
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    marginBottom: 15,
-  },
-});
-
-export default TextInput;
+export default forwardRef(TextInput);

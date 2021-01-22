@@ -13,7 +13,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "packagerOpts": {
       "config": "metro.config.js",
       "sourceExts": [
@@ -41,6 +43,8 @@
     },
     "web": {
       "favicon": "./assets/images/favicon.png"
-    }
+    },
+    "description": "",
+    "githubUrl": "https://github.com/febrielven/employee-absences-app.git"
   }
 }
