@@ -10,7 +10,7 @@ type ButtonType = 'default' | 'primary' | 'secondary';
 
 type Props = WithStyles<typeof styles> &
   ButtonProps & {
-    onPress?:() => void;
+    onPress?: () => void;
     buttonType?: ButtonType;
     isLoading?: boolean;
     disabled?: boolean;
@@ -22,8 +22,8 @@ function Button(props: Props) {
   let {
     children,
     classes,
-    isLoading=false,
-    disabled =false,
+    isLoading = false,
+    disabled = false,
     onPress,
     buttonType = 'default' as ButtonType,
     containerStyle,

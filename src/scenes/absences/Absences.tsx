@@ -5,7 +5,6 @@ import {Control, DeepMap, FieldError, useForm} from 'react-hook-form';
 import {Button, Icon, Text} from '../../generals/core-ui';
 import {ControlledTextInput} from '../../generals/components';
 
-// Absences form type
 export type AbsencesForm = {
   nik: string;
   password: string;
@@ -25,7 +24,6 @@ function Absences() {
   );
 }
 
-// Auth props type controls
 type AuthProps = {
   control: Control<AbsencesForm>;
   errors: DeepMap<AbsencesForm, FieldError>;
@@ -40,43 +38,6 @@ function Auth({control, errors}: AuthProps) {
       <Text size="large" bold style={styles.categoryDescription}>
         Masukan data akun Anda untuk proses absensi
       </Text>
-      {/* <ControlledTextInput
-        control={control}
-        rules={{
-          required: 'NIK wajib diisi',
-          minLength: {
-            value: 8,
-            message: 'NIK yang diinput tidak valid',
-          },
-        }}
-        transformOutput={(event) => {
-          let output = event.target.value;
-          let filteredOutput = output.replace(/[^0-9]/g, '');
-          return filteredOutput.slice(0, 8);
-        }}
-        error={!!errors.nik}
-        helperText={errors.nik?.message}
-        name='nik'
-        label='NIK (Nomor Induk Karyawan)*'
-        style={styles.input}
-      /> */}
-
-      {/* <ControlledTextInput
-        control={control}
-        rules={{
-          required: 'Password wajib diisi',
-          minLength: {
-            value: 8,
-            message: 'Password yang diinput tidak valid',
-          },
-        }}
-        error={!!errors.password}
-        helperText={errors.password?.message}
-        name='password'
-        label='Password*'
-        style={styles.input}
-      /> */}
-      
     </View>
   );
 }
