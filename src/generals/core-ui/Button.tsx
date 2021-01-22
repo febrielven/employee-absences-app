@@ -8,8 +8,7 @@ import {BUTTON} from '../constants/colors';
 
 type ButtonType = 'default' | 'primary' | 'secondary';
 
-type Props = WithStyles<typeof styles> &
-  ButtonProps & {
+type Props ={
     onPress?: () => void;
     buttonType?: ButtonType;
     isLoading?: boolean;
@@ -21,7 +20,6 @@ type Props = WithStyles<typeof styles> &
 function Button(props: Props) {
   let {
     children,
-    classes,
     isLoading,
     disabled,
     onPress,
@@ -30,9 +28,7 @@ function Button(props: Props) {
     ...otherProps
   } = props;
 
-  let buttonStyle = disabled
-    ? classes.coreStyle
-    : classNames(classes.coreStyle, classes[buttonType]);
+
 
   return (
     <View style={containerStyle}>
@@ -40,7 +36,6 @@ function Button(props: Props) {
         variant="contained"
         onClick={onPress}
         disabled={disabled}
-        className={buttonStyle}
         disableRipple={isLoading}
         {...otherProps}
       >
@@ -84,4 +79,4 @@ const styles = createStyles({
   },
 });
 
-export default withStyles(styles)(Button);
+export default Button;
