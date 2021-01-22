@@ -23,7 +23,7 @@ function Text(props: Props) {
     bold,
     italic,
     style,
-    children,
+
     ...otherProps
   } = props;
 
@@ -39,7 +39,7 @@ function Text(props: Props) {
 
   return (
     <ReactText style={defaultStyle} {...otherProps}>
-      {children}
+      Text
     </ReactText>
   );
 }
