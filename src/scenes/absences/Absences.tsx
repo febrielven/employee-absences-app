@@ -18,7 +18,8 @@ function Absences() {
   return (
     <>
       <View style={styles.container}>
-        <Auth control={control} errors={errors} />  
+        <Auth control={control} errors={errors} />
+        <Button />
       </View>
     </>
   );
@@ -60,7 +61,7 @@ function Auth({control, errors}: AuthProps) {
         style={styles.input}
       /> */}
 
-      <ControlledTextInput
+      {/* <ControlledTextInput
         control={control}
         rules={{
           required: 'Password wajib diisi',
@@ -74,7 +75,7 @@ function Auth({control, errors}: AuthProps) {
         name='password'
         label='Password*'
         style={styles.input}
-      />
+      /> */}
       
     </View>
   );
