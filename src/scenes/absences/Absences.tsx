@@ -40,13 +40,13 @@ type AuthProps = {
 function Auth({control, errors}: AuthProps) {
   return (
     <View>
-       {/* <Text size="xlarge" bold style={styles.category}>
+       <Text size="xlarge" bold style={styles.category}>
         Login Karyawan WFH
       </Text>
       <Text size="large" bold style={styles.categoryDescription}>
         Masukan data akun Anda untuk proses absensi
-      </Text> */}
-      <ControlledTextInput
+      </Text>
+      {/* <ControlledTextInput
         control={control}
         rules={{
           required: 'NIK wajib diisi',
@@ -55,11 +55,11 @@ function Auth({control, errors}: AuthProps) {
             message: 'NIK yang diinput tidak valid',
           },
         }}
-        // transformOutput={(event) => {
-        //   let output = event.target.value;
-        //   let filteredOutput = output.replace(/[^0-9]/g, '');
-        //   return filteredOutput.slice(0, 8);
-        // }}
+        transformOutput={(event) => {
+          let output = event.target.value;
+          let filteredOutput = output.replace(/[^0-9]/g, '');
+          return filteredOutput.slice(0, 8);
+        }}
         error={!!errors.nik}
         helperText={errors.nik?.message}
         name='nik'
@@ -81,7 +81,7 @@ function Auth({control, errors}: AuthProps) {
         name='password'
         label='Password*'
         style={styles.input}
-      />
+      /> */}
       
     </View>
   );
