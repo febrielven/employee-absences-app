@@ -2,7 +2,7 @@ import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import {Control, DeepMap, FieldError, useForm} from 'react-hook-form';
 
-import {Button, Icon, Text} from '../../generals/core-ui';
+import {Button, Icon, Text, Camera, ModalView} from '../../generals/core-ui';
 import {ControlledTextInput} from '../../generals/components';
 
 export type AbsencesForm = {
@@ -13,20 +13,25 @@ export type AbsencesForm = {
 
 function Absences() {
   let {control, errors, handleSubmit, setValue} = useForm<AbsencesForm>();
-
+  let [showCamera, setShowCamera] = React.useState(true);
   return (
     <>
+     
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
         <Button
           onPress={handleSubmit((_data) => {
-              console.log('test');
+            console.log('test');
           })}
           containerStyle={styles.nextButton}
         >
           Login
         </Button>
       </View>
+
+      <ModalView visible={showCamera} style={styles.previewContainer}>
+        <Camera />
+      </ModalView>
     </>
   );
 }
@@ -39,11 +44,11 @@ type AuthProps = {
 function Auth({control, errors}: AuthProps) {
   return (
     <View>
-       <Text size="xlarge" bold style={styles.category}>
+      <Text size="xlarge" bold style={styles.category}>
         Login Karyawan WFH
       </Text>
       <Text size="large" bold style={styles.categoryDescription}>
-          Masukan data akun Anda untuk proses absensi
+        Masukan data akun Anda untuk proses absensi
       </Text>
       <ControlledTextInput
         control={control}
@@ -61,8 +66,8 @@ function Auth({control, errors}: AuthProps) {
         }}
         error={!!errors.nik}
         helperText={errors.nik?.message}
-        name='nik'
-        label='NIK (Nomor Induk Karyawan)*'
+        name="nik"
+        label="NIK (Nomor Induk Karyawan)*"
         style={styles.input}
       />
 
@@ -77,11 +82,10 @@ function Auth({control, errors}: AuthProps) {
         }}
         error={!!errors.password}
         helperText={errors.password?.message}
-        name='password'
-        label='Password*'
+        name="password"
+        label="Password*"
         style={styles.input}
       />
-      
     </View>
   );
 }
@@ -91,8 +95,7 @@ let styles = {
     marginHorizontal: 16,
     marginVertical: 10,
     flex: 1,
-    justifyContent:'center',
-    
+    justifyContent: 'center',
   },
   category: {
     marginBottom: 8,
@@ -109,6 +112,10 @@ let styles = {
   },
   nextButton: {
     marginTop: 10,
+  },
+  previewContainer: {
+    flex: 1,
+    width: '100%',
   },
 } as const;
 

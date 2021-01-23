@@ -1,4 +1,4 @@
-import React, {forwardRef, ReactNode, Ref} from 'react';
+import React, {forwardRef, ReactNode, Ref, ChangeEvent} from 'react';
 import {StyleProp, TextStyle} from 'react-native';
 import {TextInput as TextField} from 'react-native-paper';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -7,6 +7,7 @@ import {TEXT_INPUT} from '../constants/colors';
 
 export type TextInputCoreUIProps = {
   onChangeText?: (input: string) => void;
+  onChange:(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>void;
   label?: string;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
@@ -27,33 +28,21 @@ function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
     ...otherProps
   } = props;
 
-  // let combinedStyle = {
-  //   ...(disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}),
-  //   ...style,
-  // };
-
   return (
     <TextField
+      mode='outlined'
       label={label}
       ref={ref}
       variant="outlined"
       onChange={
         onChangeText
-          ? (event) => {
+          ? (event:any) => {
               onChangeText && onChangeText(event.target.value);
             }
           : undefined
       }
       style={style}
       disabled={disabled || readOnly}
-      // InputProps={{
-      //   startAdornment: leftElement ? (
-      //     <InputAdornment position="start">{leftElement}</InputAdornment>
-      //   ) : undefined,
-      //   endAdornment: rightElement ? (
-      //     <InputAdornment position="end">{rightElement}</InputAdornment>
-      //   ) : undefined,
-      // }}
       {...otherProps}
     />
   );

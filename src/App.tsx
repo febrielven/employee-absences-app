@@ -6,12 +6,12 @@ import {Header, Footer} from './generals/components';
 export default function App() {
   return (
     <>
-      <Header />
-      <View style={styles.container}>
+      <Header/>
+      <ScrollView style={styles.container}>
         <View style={styles.mobileView}>
           <Absences />
         </View>
-      </View>
+      </ScrollView>
       <Footer />
     </>
   );
@@ -20,9 +20,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    display: 'flex',
-    flex:1,
-   
+    display: 'flex'
   },
   mobileView: {
     flex: 1,

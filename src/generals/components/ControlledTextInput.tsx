@@ -30,7 +30,7 @@ function ControlledTextInput(props: Props) {
           {...controllerProps}
           onChange={
             transformOutput
-              ? (data) => {
+              ? (data:any) => {
                   onChange(transformOutput && transformOutput(data));
                 }
               : onChange
