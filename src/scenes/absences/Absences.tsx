@@ -13,21 +13,27 @@ export type AbsencesForm = {
 
 function Absences() {
   let {control, errors, handleSubmit, setValue} = useForm<AbsencesForm>();
-  let [showCamera, setShowCamera] = React.useState(true);
+  let [showCamera, setShowCamera] = React.useState(false);
+  let [showLogin, setShowLogin] = React.useState(true);
 
   return (
     <>
-      <View style={styles.container}>
+    {showLogin && (
+        <View style={styles.container}>
         <Auth control={control} errors={errors} />
         <Button
           onPress={handleSubmit((_data) => {
             console.log('test');
+            setShowLogin(false);
+            setShowCamera(true)
           })}
           containerStyle={styles.nextButton}
         >
           Login
         </Button>
       </View>
+    )}
+      
 
       <ModalView visible={showCamera} style={styles.previewContainer}>
         <Camera />
