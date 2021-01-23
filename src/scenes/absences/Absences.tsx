@@ -38,6 +38,7 @@ function Absences() {
   let onSave = () => {
     setShowPreview(false);
     setShowCamera(false);
+    setShowLogin(true);
   };
 
   return (

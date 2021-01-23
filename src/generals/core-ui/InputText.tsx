@@ -1,13 +1,11 @@
 import React, {forwardRef, ReactNode, Ref, ChangeEvent} from 'react';
 import {StyleProp, TextStyle} from 'react-native';
-import {TextInput as TextField} from 'react-native-paper';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import {TextField} from '@material-ui/core';
 
 import {TEXT_INPUT} from '../constants/colors';
 
 export type TextInputCoreUIProps = {
   onChangeText?: (input: string) => void;
-  onChange:(event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>)=>void;
   label?: string;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
