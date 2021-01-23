@@ -1,8 +1,14 @@
 import React from 'react';
-import {View, TouchableOpacity, Platform, Alert} from 'react-native';
+import {View} from 'react-native';
 import {Control, DeepMap, FieldError, useForm} from 'react-hook-form';
 
-import {Button, Icon, Text, Camera, ModalView} from '../../generals/core-ui';
+import {
+  Button,
+  Text,
+  Camera,
+  ModalView,
+  Preview,
+} from '../../generals/core-ui';
 import {ControlledTextInput} from '../../generals/components';
 
 export type AbsencesForm = {
@@ -14,29 +20,50 @@ export type AbsencesForm = {
 function Absences() {
   let {control, errors, handleSubmit, setValue} = useForm<AbsencesForm>();
   let [showCamera, setShowCamera] = React.useState(false);
+  let [showPreview, setShowPreview] = React.useState(false);
   let [showLogin, setShowLogin] = React.useState(true);
+  let [imageSourceSelfie, setImageSourceSelfie] = React.useState(null);
+
+  let onCaptureDone = (source: any) => {
+    setShowCamera(false);
+    setShowPreview(true);
+    setImageSourceSelfie(source);
+  };
+  let onUndo = () => {
+    setShowPreview(false);
+    setShowCamera(true);
+    setImageSourceSelfie(null);
+  };
+
+  let onSave = () => {
+    setShowPreview(false);
+    setShowCamera(false);
+  };
 
   return (
     <>
-    {showLogin && (
+      {showLogin && (
         <View style={styles.container}>
-        <Auth control={control} errors={errors} />
-        <Button
-          onPress={handleSubmit((_data) => {
-            console.log('test');
-            setShowLogin(false);
-            setShowCamera(true)
-          })}
-          containerStyle={styles.nextButton}
-        >
-          Login
-        </Button>
-      </View>
-    )}
-      
+          <Auth control={control} errors={errors} />
+          <Button
+            onPress={handleSubmit((_data) => {
+              console.log('test');
+              setShowLogin(false);
+              setShowCamera(true);
+            })}
+            containerStyle={styles.nextButton}
+          >
+            Login
+          </Button>
+        </View>
+      )}
 
       <ModalView visible={showCamera} style={styles.previewContainer}>
-        <Camera />
+        <Camera onCaptureDone={onCaptureDone} />
+      </ModalView>
+
+      <ModalView visible={showPreview} style={styles.previewContainer}>
+        <Preview uri={imageSourceSelfie} onSave={onSave} onUndo={onUndo} />
       </ModalView>
     </>
   );

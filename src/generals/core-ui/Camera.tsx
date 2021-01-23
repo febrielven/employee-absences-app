@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef, useCallback} from 'react';
 import {
   StyleSheet,
   View,
@@ -8,21 +8,35 @@ import {
   Image,
 } from 'react-native';
 import {Camera as ExpoCamera} from 'expo-camera';
+
 import {Text, Icon} from './';
 import frameSelfie from '../../../assets/images/frames/frameSelfie.png';
 
 export type MaskType = 'selfie';
 
+type CameraType = 'front' | 'back';
 type Props = {
-  cameraType?: string;
   onDismiss?: () => void;
-  onCaptureDone?: () => void;
+  onCaptureDone: (source: any) => void;
   onInfo?: () => void;
   mask?: MaskType;
+  cameraType?: CameraType;
 };
+
 export default function Camera(props: Props) {
-  let {mask = 'selfie' as MaskType, onDismiss, onInfo, onCaptureDone} = props;
-  const [type, setType] = useState(ExpoCamera.Constants.Type.front);
+  let {
+    mask = 'selfie' as MaskType,
+    cameraType = 'front',
+    onDismiss,
+    onInfo,
+    onCaptureDone,
+  } = props;
+  let webCamRef = useRef<ExpoCamera>(null);
+  let capture = useCallback(async () => {
+    let source: any = await webCamRef.current?.takePictureAsync();
+    // let imgBase64: string = JSON.stringify(source.uri);
+    !!source && onCaptureDone(source);
+  }, [webCamRef, onCaptureDone]);
 
   useEffect(() => {
     (async () => {
@@ -37,8 +51,13 @@ export default function Camera(props: Props) {
 
   return (
     <>
-      <ExpoCamera style={{flex: 1}} type={type} />
-      <Mask mask={mask} onDismiss={onDismiss} onInfo={onInfo} />
+      <ExpoCamera type={cameraType} ref={webCamRef} style={{flex: 1}} />
+      <Mask
+        mask={mask}
+        onDismiss={onDismiss}
+        onInfo={onInfo}
+        onAction={capture}
+      />
     </>
   );
 }
@@ -58,9 +77,6 @@ function Mask(props: MaskProps) {
       </View>
       <View style={styles.mask}>
         <View style={styles.maskContent}>
-          <TouchableOpacity onPress={onDismiss} style={styles.backWrapper}>
-            {/* <Icon name="arrow_back" color="secondary" /> */}
-          </TouchableOpacity>
           {mask === 'selfie' ? (
             <View style={styles.descriptionSelfie}>
               <Text typeColor="secondary">
@@ -76,12 +92,6 @@ function Mask(props: MaskProps) {
                 <Icon name="camera" size="large" />
               </TouchableOpacity>
             </View>
-            {/* <View style={styles.infoButtonWrapper}>
-              <TouchableOpacity onPress={onInfo}>
-                INFO
-                <Icon name="info_circle" color="secondary" size="large" />
-              </TouchableOpacity>
-            </View> */}
           </View>
         </View>
       </View>
@@ -102,16 +112,12 @@ const styles = StyleSheet.create({
   },
   maskImage: {
     flex: 1,
-    width:'100%',
-    height:'100%'
+    width: '100%',
+    height: '100%',
   },
   maskContent: {
     padding: 10,
     flex: 1,
-  },
-  backWrapper: {
-    padding: 10,
-    width: 44,
   },
   description: {
     flex: 1,
@@ -128,11 +134,6 @@ const styles = StyleSheet.create({
   },
   cameraButtonWrapper: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  infoButtonWrapper: {
-    flex: 0.7,
     alignItems: 'center',
     justifyContent: 'center',
   },
