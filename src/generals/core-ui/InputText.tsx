@@ -33,8 +33,24 @@ function TextInput(props: Props) {
         label={label}
         placeholder={placeholder}
         variant="outlined"
+        onChange={(event) => {
+          onChangeText && onChangeText(event.target.value);
+        }}
         style={disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}}
         disabled={disabled || readOnly}
+        InputProps={{
+          startAdornment: leftElement ? (
+            <InputAdornment position="start">{leftElement}</InputAdornment>
+          ) : (
+            undefined
+          ),
+          endAdornment: rightElement ? (
+            <InputAdornment position="end">{rightElement}</InputAdornment>
+          ) : (
+            undefined
+          ),
+        }}
+        {...otherProps}
       />
     </View>
   );
