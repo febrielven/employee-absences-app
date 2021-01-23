@@ -7010,11 +7010,6 @@ react-native-svg@12.1.0:
     css-select "^2.1.0"
     css-tree "^1.0.0-alpha.39"
 
-react-native-typescript-material-ui-collection@^0.0.52:
-  version "0.0.52"
-  resolved "https://registry.yarnpkg.com/react-native-typescript-material-ui-collection/-/react-native-typescript-material-ui-collection-0.0.52.tgz#3166cebc910b5fc8baa8c471c2ff911f2466d680"
-  integrity sha512-3Mud23wTtPUkR7EYqG6upNeKPVJiTNDJ5YW2Z+YQJPYF93hIKZ51iS4PNKobBEhBI8+Os+pHJcttODJNFo7Y3A==
-
 react-native-web@~0.13.12:
   version "0.13.18"
   resolved "https://registry.yarnpkg.com/react-native-web/-/react-native-web-0.13.18.tgz#964f058a16521a3b9a31b091415edfef5b6ef305"
