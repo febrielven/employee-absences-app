@@ -1,0 +1,1 @@
+export {default as frameSelfie} from './frames/frameSelfie.png';
