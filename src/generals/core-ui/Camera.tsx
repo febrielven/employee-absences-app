@@ -1,5 +1,5 @@
-import React, {useCallback, useRef} from 'react';
-import {Platform, Alert} from 'react-native'
+import React, {useCallback, useRef, useEffect} from 'react';
+import {View, Text, Platform, Alert} from 'react-native'
 import {Camera as ExpoCamera} from 'expo-camera';
 
 type flashModel = 'off' | 'on';
@@ -13,7 +13,8 @@ type Props ={
 
 function Camera(props: Props) {
     const [startCamera, setStartCamera] = React.useState(true)
-
+    const [hasPermission, setHasPermission] = React.useState(null);
+    
     const [type, setType] = React.useState(ExpoCamera.Constants.Type.back);
     
     let {
@@ -22,23 +23,36 @@ function Camera(props: Props) {
         onCaptureDone,
         onInfo
     } = props;
+
+    useEffect(() => {
+        (async () => {
+          const { status } = await ExpoCamera.requestPermissionsAsync();
+          setHasPermission(status === 'granted');
+        })();
+      }, []);
+
+      if (hasPermission === null) {
+        return <View />;
+      }
+      if (hasPermission === false) {
+        return <Text>No access to camera</Text>;
+      }
   
-    useCallback(async()=>{
-        const types = await ExpoCamera.getAvailableCameraTypesAsync();
-        alert(JSON.stringify(types));
-        setTypes(types);
-        if (Platform.OS === 'web') {
-          setStartCamera(true)
-        } else {
-          const {status} = await ExpoCamera.requestPermissionsAsync()
-          console.log(status)
-          if (status === 'granted') {
-            setStartCamera(true)
-          } else {
-            Alert.alert('Access denied')
-          }
-        }
-    },[startCamera]);
+    // useCallback(async()=>{
+    //     const types = await ExpoCamera.getAvailableCameraTypesAsync();
+    //     alert(JSON.stringify(types));
+    //     if (Platform.OS === 'web') {
+    //       setStartCamera(true)
+    //     } else {
+    //       const {status} = await ExpoCamera.requestPermissionsAsync()
+    //       console.log(status)
+    //       if (status === 'granted') {
+    //         setStartCamera(true)
+    //       } else {
+    //         Alert.alert('Access denied')
+    //       }
+    //     }
+    // },[startCamera]);
 
     let webCamRef = useRef<ExpoCamera>(null);
     return(
