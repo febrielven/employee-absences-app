@@ -1,59 +1,49 @@
-import React, {forwardRef, ReactNode, Ref} from 'react';
-import {TextFieldProps} from '@material-ui/core';
-import {TextInput as TextField} from 'react-native-paper';
+import React, {ReactNode} from 'react';
+import {StyleProp, StyleSheet, View, ViewStyle} from 'react-native';
+import TextField, {TextFieldProps} from '@material-ui/core/TextField';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
 import {TEXT_INPUT} from '../constants/colors';
 
-export type TextInputCoreUIProps = TextFieldProps & {
+type Props = TextFieldProps & {
   onChangeText?: (input: string) => void;
   label?: string;
   leftElement?: ReactNode;
   rightElement?: ReactNode;
   readOnly?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
-function TextInput(props: TextInputCoreUIProps, ref: Ref<HTMLDivElement>) {
+function TextInput(props: Props) {
   let {
     label,
+    placeholder,
     onChangeText,
     leftElement,
     rightElement,
     readOnly,
     disabled,
-    style,
+    containerStyle,
     ...otherProps
   } = props;
 
-  // let combinedStyle = {
-  //   ...(disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}),
-  //   ...style,
-  // };
-
   return (
-    <TextField
-      label={label}
-      ref={ref}
-      variant="outlined"
-      onChange={
-        onChangeText
-          ? (event) => {
-              onChangeText && onChangeText(event.target.value);
-            }
-          : undefined
-      }
-      disabled={disabled || readOnly}
-      InputProps={{
-        startAdornment: leftElement ? (
-          <InputAdornment position="start">{leftElement}</InputAdornment>
-        ) : undefined,
-        endAdornment: rightElement ? (
-          <InputAdornment position="end">{rightElement}</InputAdornment>
-        ) : undefined,
-      }}
-      {...otherProps}
-    />
+    <View style={[styles.container, containerStyle]}>
+      <TextField
+        label={label}
+        placeholder={placeholder}
+        variant="outlined"
+        style={disabled ? {backgroundColor: TEXT_INPUT.disabled} : {}}
+        disabled={disabled || readOnly}
+      />
+    </View>
   );
 }
 
-export default forwardRef(TextInput);
+const styles = StyleSheet.create({
+  container: {
+    marginBottom: 15,
+  },
+});
+
+export default TextInput;
