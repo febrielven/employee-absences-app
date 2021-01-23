@@ -6,13 +6,13 @@ import {Header, Footer} from './generals/components';
 export default function App() {
   return (
     <>
-      <Header />
+      {/* <Header /> */}
       <View style={styles.container}>
         <View style={styles.mobileView}>
           <Absences />
         </View>
       </View>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
