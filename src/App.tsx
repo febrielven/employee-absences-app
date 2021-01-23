@@ -1,20 +1,18 @@
 import React from 'react';
 import {StyleSheet, View, ScrollView} from 'react-native';
 import {Absences} from './scenes/absences';
-import {Camera} from './generals/core-ui';
 import {Header, Footer} from './generals/components';
 
 export default function App() {
   return (
     <>
-    <Camera />
-      {/* <Header/>
+      <Header />
       <View style={styles.container}>
         <View style={styles.mobileView}>
           <Absences />
         </View>
       </View>
-      <Footer /> */}
+      <Footer />
     </>
   );
 }
@@ -22,7 +20,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    display: 'flex'
+    display: 'flex',
+    flex:1,
+   
   },
   mobileView: {
     flex: 1,
