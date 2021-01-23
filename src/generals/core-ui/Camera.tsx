@@ -1,69 +1,65 @@
-import React, {useCallback, useRef, useEffect} from 'react';
-import {View, Text, Platform, Alert} from 'react-native'
-import {Camera as ExpoCamera} from 'expo-camera';
+import React, { useState, useEffect } from 'react';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { Camera as ExpoCamera } from 'expo-camera';
 
-type flashModel = 'off' | 'on';
-type Props ={
-    cameraType?:string;
-    flashModel?:flashModel;
-    onDismiss?:() => void;
-    onCaptureDone?:()=>void;
-    onInfo?: () => void;
+export default function TestCamera() {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [type, setType] = useState(ExpoCamera.Constants.Type.front);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await ExpoCamera.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  if (hasPermission === null) {
+    return <View />;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+  return (
+    <View style={styles.container}>
+      <ExpoCamera style={styles.camera} type={type}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              setType(
+                type === ExpoCamera.Constants.Type.back
+                  ? ExpoCamera.Constants.Type.front
+                  : ExpoCamera.Constants.Type.back
+              );
+            }}>
+            <Text style={styles.text}> Flip </Text>
+          </TouchableOpacity>
+        </View>
+      </ExpoCamera>
+    </View>
+  );
 }
 
-function Camera(props: Props) {
-    const [startCamera, setStartCamera] = React.useState(true)
-    const [hasPermission, setHasPermission] = React.useState(null);
-    
-    const [type, setType] = React.useState(ExpoCamera.Constants.Type.back);
-    
-    let {
-        flashModel = 'off',
-        onDismiss,
-        onCaptureDone,
-        onInfo
-    } = props;
-
-    useEffect(() => {
-        (async () => {
-          const { status } = await ExpoCamera.requestPermissionsAsync();
-          setHasPermission(status === 'granted');
-        })();
-      }, []);
-
-      if (hasPermission === null) {
-        return <View />;
-      }
-      if (hasPermission === false) {
-        return <Text>No access to camera</Text>;
-      }
-  
-    // useCallback(async()=>{
-    //     const types = await ExpoCamera.getAvailableCameraTypesAsync();
-    //     alert(JSON.stringify(types));
-    //     if (Platform.OS === 'web') {
-    //       setStartCamera(true)
-    //     } else {
-    //       const {status} = await ExpoCamera.requestPermissionsAsync()
-    //       console.log(status)
-    //       if (status === 'granted') {
-    //         setStartCamera(true)
-    //       } else {
-    //         Alert.alert('Access denied')
-    //       }
-    //     }
-    // },[startCamera]);
-
-    let webCamRef = useRef<ExpoCamera>(null);
-    return(
-        <ExpoCamera
-        type={type}
-        flashMode={flashModel}
-        ref={webCamRef}
-        style={{width: '100%', height: '100%', flex:1,}}
-    />
-    );
-  
-}
-
-export default Camera;
+const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    camera: {
+      flex: 1,
+    },
+    buttonContainer: {
+      flex: 1,
+      backgroundColor: 'transparent',
+      flexDirection: 'row',
+      margin: 20,
+    },
+    button: {
+      flex: 0.1,
+      alignSelf: 'flex-end',
+      alignItems: 'center',
+    },
+    text: {
+      fontSize: 18,
+      color: 'white',
+    },
+})
