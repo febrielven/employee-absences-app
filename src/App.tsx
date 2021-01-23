@@ -7,11 +7,11 @@ export default function App() {
   return (
     <>
       <Header/>
-      <ScrollView style={styles.container}>
+      <View style={styles.container}>
         <View style={styles.mobileView}>
           <Absences />
         </View>
-      </ScrollView>
+      </View>
       <Footer />
     </>
   );

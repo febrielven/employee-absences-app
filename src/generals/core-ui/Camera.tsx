@@ -22,22 +22,22 @@ function Camera(props: Props) {
         onInfo
     } = props;
   
-    useCallback(async()=>{
-        const types = await ExpoCamera.getAvailableCameraTypesAsync();
-        alert(JSON.stringify(types));
-        setTypes(types);
-        if (Platform.OS === 'web') {
-          setStartCamera(true)
-        } else {
-          const {status} = await ExpoCamera.requestPermissionsAsync()
-          console.log(status)
-          if (status === 'granted') {
-            setStartCamera(true)
-          } else {
-            Alert.alert('Access denied')
-          }
-        }
-    },[startCamera]);
+    // useCallback(async()=>{
+    //     const types = await ExpoCamera.getAvailableCameraTypesAsync();
+    //     alert(JSON.stringify(types));
+    //     setTypes(types);
+    //     if (Platform.OS === 'web') {
+    //       setStartCamera(true)
+    //     } else {
+    //       const {status} = await ExpoCamera.requestPermissionsAsync()
+    //       console.log(status)
+    //       if (status === 'granted') {
+    //         setStartCamera(true)
+    //       } else {
+    //         Alert.alert('Access denied')
+    //       }
+    //     }
+    // },[startCamera]);
 
     let webCamRef = useRef<ExpoCamera>(null);
     return(
@@ -45,7 +45,7 @@ function Camera(props: Props) {
         type={ExpoCamera.Constants.Type.front}
         flashMode={flashModel}
         ref={webCamRef}
-        style={{width: '100%', height: '100%'}}
+        style={{width: '100%', height: '100%', flex:1,}}
     />
     );
   
