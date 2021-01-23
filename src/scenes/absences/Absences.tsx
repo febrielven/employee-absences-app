@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableOpacity, Platform, Alert} from 'react-native';
 import {Control, DeepMap, FieldError, useForm} from 'react-hook-form';
 
 import {Button, Icon, Text, Camera, ModalView} from '../../generals/core-ui';
@@ -14,9 +14,9 @@ export type AbsencesForm = {
 function Absences() {
   let {control, errors, handleSubmit, setValue} = useForm<AbsencesForm>();
   let [showCamera, setShowCamera] = React.useState(true);
+
   return (
     <>
-     
       <View style={styles.container}>
         <Auth control={control} errors={errors} />
         <Button
