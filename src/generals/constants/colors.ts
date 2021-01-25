@@ -7,6 +7,7 @@ const BRIGHT_BLUE = '#04559F';
 const SOFT_GRAY = '#BDBDBD';
 const WHITE = '#FFFFFF';
 const SOFT_YELLOW = '#F79931';
+const RED = '#fc030f';
 
 /**
  * Opacity main colors in solid hex values
@@ -18,6 +19,7 @@ const SOFT_BLUE10 = 'rgba(242, 246, 250, 0.1)';
 const GRAY30 = '#CDCFD0';
 const GRAY90 = '#E5E5E5';
 
+
 /**
  * Contextual color names based on usage
  */
@@ -28,19 +30,21 @@ export const TEXT = {
   primary: PRIMARY,
   secondary: WHITE,
   disabled: SOFT_GRAY,
+  error: RED
 };
 
 export const TEXT_INPUT = {
   disabled: GRAY90,
+  default:BLACK,
 };
 
 export const BUTTON = {
   default: {
-    background: PRIMARY,
+    background: BLACK,
     text: WHITE,
     hover: PRIMARY,
     loading: WHITE,
-    border: PRIMARY,
+    border: BLACK,
   },
   primary: {
     background: WHITE,

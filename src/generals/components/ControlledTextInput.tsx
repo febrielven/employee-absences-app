@@ -1,9 +1,9 @@
 import React, {ChangeEvent} from 'react';
 import {Controller, UseControllerOptions} from 'react-hook-form';
-import {TextInput, TextInputCoreUIProps} from '../core-ui';
+import {InputTextNative, TextInputNativeProps} from '../core-ui';
 
 type Props = UseControllerOptions &
-  TextInputCoreUIProps & {
+  TextInputNativeProps& {
     transformOutput?: (
       event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
     ) => any;
@@ -25,7 +25,7 @@ function ControlledTextInput(props: Props) {
       rules={rules}
       defaultValue={defaultValue}
       render={({onChange, ...controllerProps}) => (
-        <TextInput
+        <InputTextNative
           {...textInputProps}
           {...controllerProps}
           onChange={

@@ -48,7 +48,7 @@ function Absences() {
           <Auth control={control} errors={errors} />
           <Button
             onPress={handleSubmit((_data) => {
-              console.log('test');
+              alert(JSON.stringify(_data));
               setShowLogin(false);
               setShowCamera(true);
             })}
@@ -89,8 +89,12 @@ function Auth({control, errors}: AuthProps) {
         rules={{
           required: 'NIK wajib diisi',
           minLength: {
-            value: 8,
-            message: 'NIK yang diinput tidak valid',
+            value: 6,
+            message: "Nik minimal 6 karakter",
+          },
+          maxLength: {
+            value: 6,
+            message: "Nik maksimal 6 karakter",
           },
         }}
         error={!!errors.nik}
@@ -105,7 +109,7 @@ function Auth({control, errors}: AuthProps) {
         rules={{
           required: 'Password wajib diisi',
           minLength: {
-            value: 8,
+            value: 6,
             message: 'Password yang diinput tidak valid',
           },
         }}
@@ -113,6 +117,7 @@ function Auth({control, errors}: AuthProps) {
         helperText={errors.password?.message}
         name="password"
         label="Password*"
+        secureTextEntry={true}        
         style={styles.input}
       />
     </View>

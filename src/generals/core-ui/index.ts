@@ -5,8 +5,9 @@ import Icon from './Icon';
 import Camera from './Camera';
 import Preview from './Preview';
 import ModalView from './ModalVew';
+import InputTextNative, {TextInputNativeProps} from './InputTextNative';
 
-export type {TextInputCoreUIProps};
+export type {TextInputCoreUIProps, TextInputNativeProps};
 
 export {
   ModalView,
@@ -14,6 +15,7 @@ export {
   Camera,
   Button,
   TextInput,
+  InputTextNative,
   Icon,
   Text,
 };
