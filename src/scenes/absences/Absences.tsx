@@ -1,20 +1,14 @@
 import React from 'react';
-import {View} from 'react-native';
+import {View, Alert} from 'react-native';
 import {Control, DeepMap, FieldError, useForm} from 'react-hook-form';
 
-import {
-  Button,
-  Text,
-  Camera,
-  ModalView,
-  Preview,
-} from '../../generals/core-ui';
+import {Button, Text, Camera, ModalView, Preview} from '../../generals/core-ui';
 import {ControlledTextInput} from '../../generals/components';
-
+import fetchApi from '../../generals/helpers/fetchApi';
 export type AbsencesForm = {
   nik: string;
-  password: string;
-  selfieImgURL: string;
+  password?: string;
+  selfieImgURL?: string;
 };
 
 function Absences() {
@@ -23,8 +17,14 @@ function Absences() {
   let [showPreview, setShowPreview] = React.useState(false);
   let [showLogin, setShowLogin] = React.useState(true);
   let [imageSourceSelfie, setImageSourceSelfie] = React.useState(null);
+  let [absences, setAbsences] = React.useState({} as AbsencesForm);
 
-  let onCaptureDone = (source: any) => {
+  let onCaptureDone = async (source: any) => {   
+    setAbsences({
+      nik: absences.nik,
+      password: absences.password,
+      selfieImgURL: source.uri,
+    });
     setShowCamera(false);
     setShowPreview(true);
     setImageSourceSelfie(source);
@@ -35,10 +35,43 @@ function Absences() {
     setImageSourceSelfie(null);
   };
 
-  let onSave = () => {
-    setShowPreview(false);
-    setShowCamera(false);
-    setShowLogin(true);
+  let onSave = async () => {
+    await onAuthSelfie();
+  };
+
+  const onAuthSelfie = async () => {
+    let {nik, password, selfieImgURL} = absences;
+    var raw =  selfieImgURL;
+    let {statusCode} = await fetchApi('/api/employee_absences', {
+      method: 'POST',
+      token: 'Basic ' + window.btoa(nik + ':' + password),
+      body: raw,
+      shouldTextPlan: true,
+    });
+
+    if (statusCode === 200) {
+      setShowPreview(false);
+      setShowCamera(false);
+      alert('Absen anda sudah diterima');
+      setShowLogin(true);
+    }
+  };
+
+  const onAuthLogin = async (props: AbsencesForm) => {
+    let {nik, password} = props;
+    let {statusCode} = await fetchApi('/api/employee_auth', {
+      method: 'POST',
+      token: 'Basic ' + window.btoa(nik + ':' + password),
+    });
+
+    if (statusCode === 200) {
+      setAbsences({
+        nik: nik,
+        password: password,
+      });
+      setShowCamera(true);
+      setShowLogin(false);
+    }
   };
 
   return (
@@ -48,9 +81,7 @@ function Absences() {
           <Auth control={control} errors={errors} />
           <Button
             onPress={handleSubmit((_data) => {
-              alert(JSON.stringify(_data));
-              setShowLogin(false);
-              setShowCamera(true);
+              onAuthLogin(_data);
             })}
             containerStyle={styles.nextButton}
           >
@@ -90,18 +121,17 @@ function Auth({control, errors}: AuthProps) {
           required: 'NIK wajib diisi',
           minLength: {
             value: 6,
-            message: "Nik minimal 6 karakter",
+            message: 'Nik minimal 6 karakter',
           },
           maxLength: {
             value: 6,
-            message: "Nik maksimal 6 karakter",
+            message: 'Nik maksimal 6 karakter',
           },
         }}
         error={!!errors.nik}
         helperText={errors.nik?.message}
         name="nik"
         label="NIK (Nomor Induk Karyawan)*"
-        style={styles.input}
       />
 
       <ControlledTextInput
@@ -117,8 +147,7 @@ function Auth({control, errors}: AuthProps) {
         helperText={errors.password?.message}
         name="password"
         label="Password*"
-        secureTextEntry={true}        
-        style={styles.input}
+        secureTextEntry={true}
       />
     </View>
   );
@@ -141,9 +170,7 @@ let styles = {
     fontWeight: '400',
     textAlign: 'center',
   },
-  input: {
-    marginBottom: 20,
-  },
+
   nextButton: {
     marginTop: 10,
   },

@@ -35,15 +35,7 @@ function TextInputNative(props: TextInputNativeProps, ref: Ref<HTMLDivElement>) 
     ...otherProps
   } = props;
 
-  let [isFocused, setIsFocused] = React.useState(false);
 
-  let handleFocus = () => {
-    setIsFocused(true);
-  };
-
-  let handleBlur = () => {
-    setIsFocused(false);
-  };
   let styleBorder = error ? {borderColor: 'red'} : {};  
   return (
     <View style={[styles.container]}>
@@ -52,13 +44,7 @@ function TextInputNative(props: TextInputNativeProps, ref: Ref<HTMLDivElement>) 
         onChange={(event) => {
           onChangeText && onChangeText(event.target.value);
         }}
-        selectionColor={TEXT_INPUT.default}
-        underlineColorAndroid={
-          isFocused ? TEXT_INPUT.default : TEXT_INPUT.default
-        }
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-  
+   
         {...otherProps}
         style={[styles.input, containerStyle, styleBorder]}
       />
@@ -72,7 +58,10 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   input: {
-    height: 50, borderColor: 'gray', borderWidth: 1,borderRadius:5,
+    height: 50, 
+    borderColor: 'gray', 
+    borderWidth: 1,
+    borderRadius:5,
     paddingLeft:10,
     paddingRight:10
   },
